@@ -8,5 +8,10 @@ public class LoggerInterceptor implements ILoggerInterceptor{
         Date time = new Date();
         System.out.printf("As at %s the weather conditions are as follows.\nTemperature:%f\nHumidity:%f\nPressure:%f\n", time.toString(), info.getTemperature(), info.getHumidity(), info.getPressure());
     }
+
+    public void onWeatherWarning(WeatherWarning warning) {
+        Date time = new Date();
+        System.out.printf("Warning issued at %s. Details - %s\n", time.toString(), warning.getWarning());
+    }
         
 }

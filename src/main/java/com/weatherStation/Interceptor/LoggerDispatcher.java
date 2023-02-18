@@ -33,8 +33,9 @@ public class LoggerDispatcher implements ILoggerInterceptor{
         }
     }
 
-    public void onWeatherWarning() {
-        // TODO Auto-generated method stub
-        
+    public void onWeatherWarning(WeatherWarning warning) {
+        for(LoggerInterceptor interceptor: interceptors) {
+            interceptor.onWeatherWarning(warning);
+        }        
     }
 }
