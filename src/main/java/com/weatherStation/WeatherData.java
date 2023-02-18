@@ -2,14 +2,17 @@ package com.weatherStation;
 
 import java.util.*;
 
+import com.weatherStation.Interceptor.LoggerDispatcher;
+import com.weatherStation.Interceptor.WeatherInfo;
+
 public class WeatherData implements Subject {
-	private List observers;
+	private List<Observer> observers;
 	private float temperature;
 	private float humidity;
 	private float pressure;
 	
 	public WeatherData() {
-		observers = new ArrayList();
+		observers = new ArrayList<Observer>();
 	}
 	
 	public void registerObserver(Observer o) {
@@ -34,6 +37,8 @@ public class WeatherData implements Subject {
 		this.temperature = temperature;
 		this.humidity = humidity;
 		this.pressure = pressure;
+		WeatherInfo info = new WeatherInfo(this);
+		LoggerDispatcher.getDispatcher().onWeatherChange(info);
 		notifyObservers();
 	}
 	

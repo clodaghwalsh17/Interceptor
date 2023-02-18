@@ -1,10 +1,15 @@
 package com.weatherStation;
 
-import java.util.*;
+import com.weatherStation.Interceptor.LoggerDispatcher;
+import com.weatherStation.Interceptor.LoggerInterceptor;
 
 public class WeatherStation {
 
 	public static void main(String[] args) {
+		LoggerInterceptor interceptor = new LoggerInterceptor();
+		LoggerDispatcher dispatcher = LoggerDispatcher.getDispatcher();
+		dispatcher.attach(interceptor);
+
 		WeatherData weatherData = new WeatherData();
 		CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay(weatherData);
 		StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherData);
