@@ -1,5 +1,8 @@
 package com.weatherStation;
 
+import com.weatherStation.Interceptor.LoggerDispatcher;
+import com.weatherStation.Interceptor.WeatherWarning;
+
 public class HeatIndexDisplay implements Observer, DisplayElement {
 	float heatIndex = 0.0f;
 	private WeatherData weatherData;
@@ -12,6 +15,10 @@ public class HeatIndexDisplay implements Observer, DisplayElement {
 	public void update(float t, float rh, float pressure) {
 		heatIndex = computeHeatIndex(t, rh);
 		display();
+		if(heatIndex > 105) {
+			WeatherWarning warning = new WeatherWarning("Excessive Heat. Stay Indoors");
+			LoggerDispatcher.getDispatcher().onWeatherWarning(warning);
+		}
 	}
 	
 	private float computeHeatIndex(float t, float rh) {

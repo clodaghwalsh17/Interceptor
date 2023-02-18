@@ -1,6 +1,7 @@
 package com.weatherStation;
 
-import java.util.*;
+import com.weatherStation.Interceptor.LoggerDispatcher;
+import com.weatherStation.Interceptor.WeatherWarning;
 
 public class ForecastDisplay implements Observer, DisplayElement {
 	private float currentPressure = 29.92f;  
@@ -25,7 +26,10 @@ public class ForecastDisplay implements Observer, DisplayElement {
 		} else if (currentPressure == lastPressure) {
 			System.out.println("More of the same");
 		} else if (currentPressure < lastPressure) {
-			System.out.println("Watch out for cooler, rainy weather");
+			String forecast = "Watch out for cooler, rainy weather";
+			System.out.println(forecast);
+			WeatherWarning warning = new WeatherWarning(forecast);
+			LoggerDispatcher.getDispatcher().onWeatherWarning(warning);
 		}
 	}
 }
