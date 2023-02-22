@@ -1,6 +1,6 @@
 package com.weatherStation;
 
-import com.weatherStation.Interceptor.LoggerDispatcher;
+import com.weatherStation.Interceptor.WarningDispatcher;
 import com.weatherStation.Interceptor.WeatherWarning;
 
 public class ForecastDisplay implements Observer, DisplayElement {
@@ -29,7 +29,7 @@ public class ForecastDisplay implements Observer, DisplayElement {
 			String forecast = "Watch out for cooler, rainy weather";
 			System.out.println(forecast);
 			WeatherWarning warning = new WeatherWarning(forecast);
-			LoggerDispatcher.getDispatcher().onWeatherWarning(warning);
+			WarningDispatcher.getDispatcher().onWeatherWarning(warning);
 		}
 	}
 }
