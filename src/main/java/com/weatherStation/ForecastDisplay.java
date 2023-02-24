@@ -22,12 +22,14 @@ public class ForecastDisplay implements Observer, DisplayElement {
 	public void display() {
 		System.out.print("Forecast: ");
 		if (currentPressure > lastPressure) {
-			System.out.println("Improving weather on the way!");
+			String forecast = "Improving weather on the way!\n";
+			System.out.printf(forecast);
 		} else if (currentPressure == lastPressure) {
-			System.out.println("More of the same");
+			String forecast = "More of the same\n";
+			System.out.printf(forecast);
 		} else if (currentPressure < lastPressure) {
-			String forecast = "Watch out for cooler, rainy weather";
-			System.out.println(forecast);
+			String forecast = "Watch out for cooler, rainy weather\n";
+			System.out.printf(forecast);
 			WeatherWarning warning = new WeatherWarning(forecast);
 			WarningDispatcher.getDispatcher().onWeatherWarning(warning);
 		}
