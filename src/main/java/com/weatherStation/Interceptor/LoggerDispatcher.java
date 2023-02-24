@@ -3,12 +3,12 @@ package com.weatherStation.Interceptor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoggerDispatcher implements ILoggerInterceptor{
+public class LoggerDispatcher implements Dispatcher, ILoggerInterceptor{
     private static LoggerDispatcher dispatcher;
-    private List<LoggerInterceptor> interceptors;
+    private List<Interceptor> interceptors;
 
     private LoggerDispatcher() {
-        interceptors = new ArrayList<LoggerInterceptor>();
+        interceptors = new ArrayList<Interceptor>();
     }
 
     public static LoggerDispatcher getDispatcher() {
@@ -19,23 +19,19 @@ public class LoggerDispatcher implements ILoggerInterceptor{
         return dispatcher;
     }
 
-    public void attach(LoggerInterceptor logger) {
+    public void attach(Interceptor logger) {
         interceptors.add(logger);
     }
 
-    public void detach(LoggerInterceptor logger) {
+    public void detach(Interceptor logger) {
         interceptors.remove(logger);
     }
 
     public void onWeatherChange(WeatherInfo info) {
-        for(LoggerInterceptor interceptor: interceptors) {
-            interceptor.onWeatherChange(info);
+        for(Interceptor interceptor: interceptors) {
+            LoggerInterceptor loggerInterceptor = (LoggerInterceptor) interceptor;
+            loggerInterceptor.onWeatherChange(info);
         }
     }
 
-    public void onWeatherWarning(WeatherWarning warning) {
-        for(LoggerInterceptor interceptor: interceptors) {
-            interceptor.onWeatherWarning(warning);
-        }        
-    }
 }

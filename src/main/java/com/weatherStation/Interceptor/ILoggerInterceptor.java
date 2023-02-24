@@ -1,6 +1,5 @@
 package com.weatherStation.Interceptor;
 
-public interface ILoggerInterceptor {
+public interface ILoggerInterceptor extends Interceptor{
     void onWeatherChange(WeatherInfo info);
-    void onWeatherWarning(WeatherWarning warning);
 }

@@ -1,6 +1,6 @@
 package com.weatherStation;
 
-import com.weatherStation.Interceptor.LoggerDispatcher;
+import com.weatherStation.Interceptor.WarningDispatcher;
 import com.weatherStation.Interceptor.WeatherWarning;
 
 public class HeatIndexDisplay implements Observer, DisplayElement {
@@ -17,7 +17,7 @@ public class HeatIndexDisplay implements Observer, DisplayElement {
 		display();
 		if(heatIndex > 105) {
 			WeatherWarning warning = new WeatherWarning("Excessive Heat. Stay Indoors");
-			LoggerDispatcher.getDispatcher().onWeatherWarning(warning);
+			WarningDispatcher.getDispatcher().onWeatherWarning(warning);
 		}
 	}
 	
@@ -34,6 +34,6 @@ public class HeatIndexDisplay implements Observer, DisplayElement {
 	}
 
 	public void display() {
-		System.out.println("Heat index is " + heatIndex);
+		System.out.printf("Heat index is %f\n", heatIndex);
 	}
 }
